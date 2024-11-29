@@ -46,7 +46,6 @@ const TableRow = ({
   },
   currency,
 }) => {
-  console.log(currency);
   return (
     <tr>
       <td>
