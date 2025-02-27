@@ -1,4 +1,4 @@
-import HomePage from "./components/templates/HomePage";
+import HomePage from "../src/components/templates/HomePage.jsx";
 import Layout from "./layouts/Layout";
 
 function App() {
