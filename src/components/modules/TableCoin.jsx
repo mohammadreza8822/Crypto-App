@@ -4,7 +4,7 @@ import chartUp from "../../assets/chart-up.svg";
 import chartDown from "../../assets/chart-down.svg";
 
 import styles from "./TableCoin.module.css";
-import { marketChart } from "../../services/CryptoApi";
+import { marketChart } from "../../services/cryptoApi.js";
 
 function TableCoin({ coins, isLoading, currency, setChart }) {
   return (
