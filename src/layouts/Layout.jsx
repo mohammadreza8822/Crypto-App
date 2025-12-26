@@ -32,7 +32,7 @@ function Layout({ children }) {
       </header>
       {children}
       <footer className={styles.footer}>
-        <p>Developed by <span className={styles.footerName}>Mohammadreza Asghary</span> ❤️</p>
+        <p>Developed by <span className={styles.footerName}>Jasem Albaset</span> ❤️</p>
       </footer>
     </>
   );
