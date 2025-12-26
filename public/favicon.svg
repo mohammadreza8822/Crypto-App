@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="url(#grad1)" opacity="0.2"/>
+  
+  <!-- Main logo shape - Crypto coin -->
+  <circle cx="32" cy="32" r="20" fill="url(#grad1)" stroke="#fff" stroke-width="2"/>
+  
+  <!-- Inner design - Blockchain blocks -->
+  <rect x="24" y="20" width="6" height="6" rx="1" fill="#fff" opacity="0.9"/>
+  <rect x="34" y="20" width="6" height="6" rx="1" fill="#fff" opacity="0.9"/>
+  <rect x="24" y="28" width="6" height="6" rx="1" fill="#fff" opacity="0.9"/>
+  <rect x="34" y="28" width="6" height="6" rx="1" fill="#fff" opacity="0.9"/>
+  <rect x="24" y="36" width="6" height="6" rx="1" fill="#fff" opacity="0.9"/>
+  <rect x="34" y="36" width="6" height="6" rx="1" fill="#fff" opacity="0.9"/>
+  
+  <!-- Connecting lines -->
+  <line x1="30" y1="23" x2="34" y2="23" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="30" y1="31" x2="34" y2="31" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="27" y1="26" x2="27" y2="34" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="37" y1="26" x2="37" y2="34" stroke="#fff" stroke-width="1.5" opacity="0.6"/>
+</svg>
+
