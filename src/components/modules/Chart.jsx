@@ -12,8 +12,13 @@ import {
   Tooltip,
 } from "recharts";
 
-function Chart({ chart, setChart }) {
+function Chart({ chart, setChart, currency = "USD" }) {
   const [type, setType] = useState("prices");
+  
+  const getCurrencySymbol = () => {
+    const currencyLower = currency.toLowerCase();
+    return currencyLower === "jpy" ? "¥" : currencyLower === "eur" ? "€" : "$";
+  };
 
   const typeHandler = (event) => {
     if (event.target.tagName === "BUTTON") {
@@ -24,9 +29,9 @@ function Chart({ chart, setChart }) {
 
   return (
     <div className={styles.container}>
-      <span className={styles.cross} onClick={() => setChart(null)}>
-        X
-      </span>
+      <button className={styles.cross} onClick={() => setChart(null)} aria-label="Close chart">
+        ×
+      </button>
       <div className={styles.chart}>
         <div className={styles.name}>
           <img src={chart.coin.image} />
@@ -49,15 +54,15 @@ function Chart({ chart, setChart }) {
         <div className={styles.details}>
           <div>
             <p>Prices:</p>
-            <span>${chart.coin.current_price}</span>
+            <span>{getCurrencySymbol()}{chart.coin.current_price?.toLocaleString() || 0}</span>
           </div>
           <div>
             <p>ATH:</p>
-            <span>${chart.coin.ath}</span>
+            <span>{getCurrencySymbol()}{chart.coin.ath?.toLocaleString() || 0}</span>
           </div>
           <div>
             <p>Market Cap:</p>
-            <span>{chart.coin.market_cap}</span>
+            <span>{getCurrencySymbol()}{chart.coin.market_cap?.toLocaleString() || 0}</span>
           </div>
         </div>
       </div>
@@ -74,14 +79,34 @@ const ChartComponent = ({ data, type }) => {
         <Line
           type="monotone"
           dataKey={type}
-          stroke="3874ff"
-          strokeWidth="2px"
+          stroke="#6366f1"
+          strokeWidth="3px"
+          dot={false}
+          activeDot={{ r: 6, fill: "#8b5cf6" }}
         />
-        <CartesianGrid stroke="#404042" />
-        <YAxis dataKey={type} domain={("auto", "auto")} />
-        <XAxis dataKey="date" hide />
-        <Legend />
-        <Tooltip />
+        <CartesianGrid stroke="rgba(255, 255, 255, 0.1)" strokeDasharray="3 3" />
+        <YAxis 
+          dataKey={type} 
+          domain={["auto", "auto"]} 
+          stroke="rgba(255, 255, 255, 0.5)"
+          tick={{ fill: "rgba(255, 255, 255, 0.7)", fontSize: 12 }}
+        />
+        <XAxis 
+          dataKey="date" 
+          hide 
+        />
+        <Legend 
+          wrapperStyle={{ color: "rgba(255, 255, 255, 0.8)" }}
+        />
+        <Tooltip 
+          contentStyle={{
+            backgroundColor: "rgba(30, 39, 70, 0.95)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            borderRadius: "12px",
+            color: "#fff"
+          }}
+          labelStyle={{ color: "#a0aec0" }}
+        />
       </LineChart>
     </ResponsiveContainer>
   );

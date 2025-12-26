@@ -1,67 +1,431 @@
 .container {
   display: flex;
   justify-content: center;
-  margin: 50px 0 100px;
-  min-height: 1000px;
+  margin: 40px auto 80px;
+  max-width: 1400px;
+  padding: 0 20px;
+  min-height: 600px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.container > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 400px;
 }
 
 .table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  animation: scaleIn 0.6s ease-out;
 }
 
 .table thead {
-  border-bottom: 2px solid #fff;
-  margin-bottom: 20px;
+  background: var(--bg-tertiary);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.table thead tr {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
 }
 
 .table th {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
   text-align: left;
-  padding: 10px 0;
+  padding: 20px 24px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.table th:first-child {
+  padding-left: 32px;
+}
+
+.table th:last-child {
+  padding-right: 32px;
 }
 
 .table tbody tr {
   height: 80px;
-  border-bottom: 1px solid #22262e;
-  font-weight: 600;
-  font-size: 1.1rem;
+  border-bottom: 1px solid var(--border-color);
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  position: relative;
+  animation: fadeInRight 0.5s ease-out backwards;
+}
+
+.table tbody tr:nth-child(1) { animation-delay: 0.05s; }
+.table tbody tr:nth-child(2) { animation-delay: 0.1s; }
+.table tbody tr:nth-child(3) { animation-delay: 0.15s; }
+.table tbody tr:nth-child(4) { animation-delay: 0.2s; }
+.table tbody tr:nth-child(5) { animation-delay: 0.25s; }
+.table tbody tr:nth-child(6) { animation-delay: 0.3s; }
+.table tbody tr:nth-child(7) { animation-delay: 0.35s; }
+.table tbody tr:nth-child(8) { animation-delay: 0.4s; }
+.table tbody tr:nth-child(9) { animation-delay: 0.45s; }
+.table tbody tr:nth-child(10) { animation-delay: 0.5s; }
+.table tbody tr:nth-child(n+11) { animation-delay: 0.55s; }
+
+.table tbody tr:hover {
+  background: var(--bg-tertiary);
+  transform: scale(1.02) translateX(5px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+/* Price change indicator on row */
+.table tbody tr::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.table tbody tr:has(.success)::before {
+  background: linear-gradient(180deg, var(--success) 0%, rgba(16, 185, 129, 0.3) 100%);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+.table tbody tr:has(.error)::before {
+  background: linear-gradient(180deg, var(--error) 0%, rgba(239, 68, 68, 0.3) 100%);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table td {
+  padding: 16px 24px;
+  color: var(--text-primary);
+}
+
+.table td:first-child {
+  padding-left: 32px;
+}
+
+.table td:last-child {
+  padding-right: 32px;
 }
 
 .symbol {
   display: flex;
   align-items: center;
   cursor: pointer;
+  gap: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 8px 12px;
+  border-radius: 12px;
+  margin: -8px -12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.symbol::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.symbol:hover::before {
+  left: 100%;
+}
+
+.symbol:hover {
+  background: var(--bg-secondary);
+  transform: translateX(8px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .symbol img {
-  width: 25px;
-  height: 25px;
-  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.symbol:hover img {
+  transform: rotate(5deg) scale(1.1);
+}
+
+.symbol img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
 }
 
 .symbol span {
   font-weight: 600;
-  font-size: 1.2rem;
-  color: #9fa6b7;
+  font-size: 1rem;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.priceChange {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  animation: fadeInScale 0.5s ease;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.priceChangeValue {
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+}
+
+.priceChangeIcon {
+  font-size: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.priceChangeBadge {
+  font-size: 1rem;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+  }
 }
 
 .success {
-  color: #57bc7c;
+  color: var(--success);
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.success:hover {
+  background: rgba(16, 185, 129, 0.15);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+  transform: translateY(-2px);
+}
+
+.success.priceChange {
+  animation: fadeInScale 0.5s ease, glowGreen 2s ease infinite;
+}
+
+@keyframes glowGreen {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+  }
 }
 
 .error {
-  color: #d33636;
+  color: var(--error);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
-@media (max-width: 600px) {
+.error:hover {
+  background: rgba(239, 68, 68, 0.15);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+  transform: translateY(-2px);
+}
+
+.error.priceChange {
+  animation: fadeInScale 0.5s ease, glowRed 2s ease infinite;
+}
+
+@keyframes glowRed {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(239, 68, 68, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+  }
+}
+
+.neutral {
+  color: var(--text-secondary);
+  background: rgba(160, 174, 192, 0.1);
+  border: 1px solid rgba(160, 174, 192, 0.2);
+}
+
+.table tbody td img {
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.priceContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.priceValue {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.priceTrend {
+  font-size: 0.9rem;
+  animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.trendUp {
+  filter: drop-shadow(0 0 4px rgba(16, 185, 129, 0.5));
+}
+
+.trendDown {
+  filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.5));
+}
+
+@media (max-width: 1024px) {
+  .table {
+    font-size: 0.9rem;
+  }
+  
+  .table th,
+  .table td {
+    padding: 12px 16px;
+  }
+  
+  .symbol img {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px;
+  }
+  
   .table {
     display: block;
-    overflow-y: scroll;
+    overflow-x: auto;
+    border-radius: 16px;
   }
-
+  
+  .table thead,
+  .table tbody,
+  .table tr,
   .table td,
   .table th {
-    padding: 0 10px;
+    display: block;
+  }
+  
+  .table thead {
+    display: none;
+  }
+  
+  .table tbody tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    border-radius: 16px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    height: auto;
+  }
+  
+  .table td {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .table td:last-child {
+    border-bottom: none;
+  }
+  
+  .table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 4px;
+  }
+  
+  .symbol {
+    grid-column: 1 / -1;
+  }
+  
+  .priceChange {
+    padding: 4px 8px;
+    font-size: 0.9rem;
+  }
+  
+  .priceChangeValue {
+    font-size: 0.9rem;
+  }
+  
+  .priceChangeIcon {
+    font-size: 1rem;
+  }
+  
+  .priceTrend {
+    font-size: 0.8rem;
   }
 }

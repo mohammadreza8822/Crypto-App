@@ -1,17 +1,293 @@
 .header {
+  position: relative;
+  margin: 20px auto;
+  max-width: 1400px;
+  border-radius: 24px;
+  overflow: hidden;
+  animation: fadeInDown 0.8s ease-out;
+  box-shadow: var(--shadow-lg);
+}
+
+.headerContent {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #3874ff;
-  padding: 10px 20px;
-  margin-bottom: 150px;
-  border-radius: 10px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid var(--border-color);
+  padding: 24px 40px;
+  z-index: 2;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header:hover .headerContent {
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.headerGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--accent-gradient);
+  z-index: 3;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: fadeInLeft 0.8s ease-out 0.2s backwards;
+}
+
+.logoIcon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-gradient);
+  border-radius: 14px;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.logoIcon::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transform: rotate(45deg);
+  animation: rotate 3s linear infinite;
+}
+
+.logoIcon svg {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  z-index: 1;
+  animation: float 3s ease-in-out infinite;
+}
+
+.header:hover .logoIcon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 25px rgba(99, 102, 241, 0.6);
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.logoText h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.5px;
+  margin: 0;
+  line-height: 1.2;
+  transition: transform 0.3s ease;
+}
+
+.header:hover .logoText h1 {
+  transform: scale(1.03);
+}
+
+.tagline {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.header:hover .tagline {
+  opacity: 1;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: fadeInRight 0.8s ease-out 0.3s backwards;
+}
+
+.statsBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.statsBadge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.statsBadge:hover::before {
+  left: 100%;
+}
+
+.statsBadge:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.badgeIcon {
+  font-size: 1.1rem;
+  animation: float 2s ease-in-out infinite;
+  display: inline-block;
+}
+
+.badgeText {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.3px;
+}
+
+.versionBadge {
+  padding: 8px 14px;
+  background: var(--accent-gradient);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(99, 102, 241, 0.4);
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.versionBadge:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.6);
 }
 
 .footer {
   text-align: center;
-  background-color: #3874ff;
-  padding: 20px;
-  margin-top: 80px;
-  border-radius: 10px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  padding: 30px 20px;
+  margin: 80px auto 20px;
+  max-width: 1400px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-gradient);
+}
+
+.footer p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin: 0;
+}
+
+.footerName {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.footer:hover .footerName {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .headerContent {
+    padding: 20px 24px;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .logoSection {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .headerActions {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .logoText h1 {
+    font-size: 1.5rem;
+  }
+
+  .logoIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logoIcon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .statsBadge {
+    padding: 8px 14px;
+  }
+
+  .badgeText {
+    font-size: 0.8rem;
+  }
 }

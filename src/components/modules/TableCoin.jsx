@@ -10,7 +10,9 @@ function TableCoin({ coins, isLoading, currency, setChart }) {
   return (
     <div className={styles.container}>
       {isLoading ? (
-        <RotatingLines strokeColor="#3874ff" strokeWidth="2" />
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px' }}>
+          <RotatingLines strokeColor="#6366f1" strokeWidth="3" width="60" />
+        </div>
       ) : (
         <table className={styles.table}>
           <thead>
@@ -54,7 +56,7 @@ const TableRow = ({ coin, currency, setChart }) => {
 
   const showHandler = async () => {
     try {
-      const res = await fetch(marketChart(id));
+      const res = await fetch(marketChart(id, currency.toLowerCase()));
       const json = await res.json();
       setChart({ ...json, coin });
     } catch (error) {
@@ -64,22 +66,49 @@ const TableRow = ({ coin, currency, setChart }) => {
 
   return (
     <tr>
-      <td>
+      <td data-label="Coin">
         <div className={styles.symbol} onClick={showHandler}>
           <img src={image} alt={name} />
           <span>{symbol.toUpperCase()}</span>
         </div>
       </td>
-      <td>{name}</td>
-      <td>
-        {currency === "jpy" ? "¥" : currency === "eur" ? "€" : "$"}
-        {current_price.toLocaleString()}
+      <td data-label="Name">{name}</td>
+      <td data-label="Price">
+        <div className={styles.priceContainer}>
+          <span className={styles.priceValue}>
+            {currency === "jpy" ? "¥" : currency === "eur" ? "€" : "$"}
+            {current_price.toLocaleString()}
+          </span>
+          {price_change && (
+            <span className={`${styles.priceTrend} ${price_change > 0 ? styles.trendUp : styles.trendDown}`}>
+              {price_change > 0 ? '📈' : '📉'}
+            </span>
+          )}
+        </div>
       </td>
-      <td className={price_change > 0 ? styles.success : styles.error}>
-        {price_change.toFixed(2)}%
+      <td data-label="24h">
+        {price_change !== null && price_change !== undefined ? (
+          <div className={`${styles.priceChange} ${price_change > 0 ? styles.success : price_change < 0 ? styles.error : styles.neutral}`}>
+            <span className={styles.priceChangeValue}>
+              {price_change > 0 ? '+' : ''}{price_change.toFixed(2)}%
+            </span>
+            <span className={styles.priceChangeIcon}>
+              {price_change > 0 ? '↗' : price_change < 0 ? '↘' : '→'}
+            </span>
+            {Math.abs(price_change) > 5 && (
+              <span className={styles.priceChangeBadge}>
+                {Math.abs(price_change) > 10 ? '🔥' : '⚡'}
+              </span>
+            )}
+          </div>
+        ) : (
+          <div className={`${styles.priceChange} ${styles.neutral}`}>
+            <span className={styles.priceChangeValue}>N/A</span>
+          </div>
+        )}
       </td>
-      <td>{total_volume.toLocaleString()}</td>
-      <td>
+      <td data-label="Total Volume">{total_volume.toLocaleString()}</td>
+      <td data-label="">
         <img src={price_change > 0 ? chartUp : chartDown} alt={name} />
       </td>
     </tr>
